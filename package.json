@@ -1,0 +1,23 @@
+{
+  "name": "node-image-optim",
+  "version": "1.0.0",
+  "description": "NodeJS Image Compression App ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlvx/NodeImageOptim.git"
+  },
+  "author": "Jose Del Valle Cordero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dlvx/NodeImageOptim/issues"
+  },
+  "homepage": "https://github.com/dlvx/NodeImageOptim#readme",
+  "dependencies": {
+    "imagemin": "^4.0.0",
+    "imagemin-pngquant": "^4.2.2"
+  }
+}
