@@ -6,6 +6,8 @@ var port = process.env.PORT || 3000;
 //Config
 var configPaths = require('./config/paths.js');
 
+app.use(express.static(__dirname + '/public')); //set the static files location
+
 //Load the compressor
 var compressor = require('./app/compressor.js');
 
