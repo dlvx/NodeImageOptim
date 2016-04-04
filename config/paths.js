@@ -1,5 +1,6 @@
 //Paths to the src and dest folders used by the compressor
 module.exports = {
-  'src' : 'images/*.png',
-  'dest' : 'build/images'
+  'upl' : 'public/uploads',
+  'src' : 'public/uploads/*.png',
+  'dest' : 'public/compressed_images'
 }
