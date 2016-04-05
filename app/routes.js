@@ -4,6 +4,8 @@ var path = require('path');
 var multer  = require('multer');
 var mime = require('mime');
 
+var fileMan = require('./fileMan.js');
+
 //Config Paths
 
 var configPaths = require('../config/paths.js');
@@ -31,7 +33,7 @@ module.exports = function(app, compressor){
 
   app.post('/upload', upload.single('file'), function(req, res, next){
     console.log(req.file);
-    compressor(configPaths);
+    compressor(configPaths, fileMan.remove);
   });
 
 }

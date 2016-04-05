@@ -2,7 +2,8 @@
 var Imagemin = require('imagemin');
 var imageminPngquant = require('imagemin-pngquant');
 
-module.exports = function(configPaths){
+
+module.exports = function(configPaths, remove){
 
   //Start image optimization instance
   new Imagemin()
@@ -15,7 +16,9 @@ module.exports = function(configPaths){
       if(err){
         console.log(err);
       }
-      console.log(files[0]);
+      console.log('Compression complete...');
+
+      remove(configPaths.src);
     });
-  
+
 }
