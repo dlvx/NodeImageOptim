@@ -1,63 +1,9 @@
 //Module
 var app = angular.module('app', ['ngFileUpload']);
 
-//Directive STUDY
-// app.directive('fileModel', ['$parse', function ($parse) {
-//             return {
-//                restrict: 'A',
-//                link: function(scope, element, attrs) {
-//                   var model = $parse(attrs.fileModel);
-//                   var modelSetter = model.assign;
-//
-//                   element.bind('change', function(){
-//                      scope.$apply(function(){
-//                         modelSetter(scope, element[0].files[0]);
-//                      });
-//                   });
-//                }
-//             };
-// }]);
-
 //Service
-// app.service('uploadService', ['$http', function($http){
-//   this.uploadToUrl = function(file, uploadUrl){
-//     var fd = new FormData();
-//     fd.append('file', file);
-//
-//     $http.post(uploadUrl, fd, {
-//       transformRequest: angular.identity,
-//       headers: {'Content-Type':undefined}
-//     })
-//     .success(function(){
-//
-//     })
-//     .error(function(){
-//
-//     })
-//
-//   }
-// }])
-
-//Controller
-app.controller('mainController', ['$scope', 'Upload', function($scope, Upload){
-
-  //upload function
-  // $scope.upload = function(){
-  //   var file = $scope.myFile;
-  //   console.log('File: ');
-  //   console.log(file);
-  //
-  //   var uploadUrl = '/upload';
-  //   uploadService.uploadToUrl(file, uploadUrl);
-  // };
-
-  $scope.submit = function(){
-    if($scope.form.file.$valid && $scope.file){
-      $scope.upload($scope.file);
-    }
-  };
-
-  $scope.upload = function(file){
+app.service('uploadService', ['Upload', function(Upload){
+  this.uploadFile = function(file){
     Upload.upload({
       url: '/upload',
       data: { file : file }
@@ -69,6 +15,22 @@ app.controller('mainController', ['$scope', 'Upload', function($scope, Upload){
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
     });
+  }
+}]);
+
+//Controller
+app.controller('mainController', ['$scope', 'uploadService', function($scope, uploadService){
+
+  $scope.submit = function(){
+    if($scope.form.file.$valid && $scope.file){
+      console.log('Submit');
+      $scope.uploadFile($scope.file);
+    }
+  };
+
+  $scope.uploadFile = function(file){
+    console.log('Upload');
+    uploadService.uploadFile(file);
   };
 
 }]);
