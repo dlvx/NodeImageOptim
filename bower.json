@@ -20,7 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-upload": "^1.0.12",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "ng-file-upload": "^12.0.4",
+    "angular": "^1.5.3"
   }
 }
