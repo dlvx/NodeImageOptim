@@ -17,7 +17,8 @@ var storage = multer.diskStorage({
     cb(null, configPaths.upl)
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '.' + mime.extension(file.mimetype));
+    //cb(null, Date.now() + '.' + mime.extension(file.mimetype));
+    cb(null, "image" + '.' + mime.extension(file.mimetype));
     //cb(null, Date.now() + '.png');
   }
 });
@@ -32,8 +33,18 @@ module.exports = function(app, compressor){
   });
 
   app.post('/upload', upload.single('file'), function(req, res, next){
+
     console.log(req.file);
-    compressor(configPaths, fileMan.remove);
+
+    compressor.compress(configPaths, function(){
+      fileMan.remove(configPaths.src);
+      res.writeHead(200, {'content-type': 'text/plain'});
+      res.end('Compression Successfull');
+    });
+  });
+
+  app.get('/download', function(req, res){
+    console.log("DOWNLOAD");
   });
 
 }

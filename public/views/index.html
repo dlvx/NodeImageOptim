@@ -21,7 +21,8 @@
           ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">
           Select
         </div>
-        <button class="btn btn-primary" type="submit" ng-click="submit()">submit</button>
+        <button class="btn btn-primary" type="submit" ng-click="submit()">Submit</button>
+        <button class="btn btn-primary" ng-click="download()" ng-disabled="disableDownload">Download</button>
       </form>
       <hr>
       <img ngf-src="file" ngf-background="file" ngf-resize="{width: 100, quality: 0.9}" />
