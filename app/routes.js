@@ -3,8 +3,9 @@
 var path = require('path');
 var multer  = require('multer');
 var mime = require('mime');
+var async = require('async');
 
-var fileMan = require('./fileMan.js');
+//var fileMan = require('./fileMan.js');
 
 //Config Paths
 
@@ -24,6 +25,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
+
 //Module
 
 module.exports = function(app, compressor){
@@ -37,14 +39,19 @@ module.exports = function(app, compressor){
     console.log(req.file);
 
     compressor.compress(configPaths, function(){
-      fileMan.remove(configPaths.src);
+      console.log("File Compressed");
       res.writeHead(200, {'content-type': 'text/plain'});
-      res.end('Compression Successfull');
+      res.end('File received and compressed');
     });
+
   });
 
   app.get('/download', function(req, res){
     console.log("DOWNLOAD");
+    //res.sendFile(path.resolve('public/compressed_images/image.png'));
+    res.contentType = 'image/png';
+    //res.contentLength = stat.size;
+    res.end(path.resolve('public/compressed_images/image.png'), 'binary');
   });
 
 }

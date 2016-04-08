@@ -18,10 +18,9 @@ module.exports = {
         if(err){
           console.log(err);
         }
-        console.log('Compression complete...');
-        //remove(configPaths.src);
+        console.log(files[0]);
         callback();
-        console.log('Compression complete...');
+        //remove(configPaths.src);
       });
 
   }

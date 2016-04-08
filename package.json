@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dlvx/NodeImageOptim#readme",
   "dependencies": {
+    "async": "^1.5.2",
     "delete": "^0.3.0",
     "express": "^4.13.4",
     "imagemin": "^4.0.0",
