@@ -40,18 +40,24 @@ module.exports = function(app, compressor){
 
     compressor.compress(configPaths, function(){
       console.log("File Compressed");
+      // res.writeHead(200, {'content-type': 'text/plain'});
+      // res.end('File received and compressed');
       res.writeHead(200, {'content-type': 'text/plain'});
-      res.end('File received and compressed');
+      res.end('compressed_images/image.png');
     });
 
   });
 
   app.get('/download', function(req, res){
     console.log("DOWNLOAD");
-    //res.sendFile(path.resolve('public/compressed_images/image.png'));
-    res.contentType = 'image/png';
+  //  res.sendFile(path.resolve('public/compressed_images/image.png'));
+
+    //res.writeHead(200, {'content-type': 'image/png'});
     //res.contentLength = stat.size;
-    res.end(path.resolve('public/compressed_images/image.png'), 'binary');
+    //res.end(path.resolve('public/compressed_images/image.png'), 'binary');
+
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.end('compressed_images/image.png');
   });
 
 }

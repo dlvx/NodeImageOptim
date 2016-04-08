@@ -24,8 +24,12 @@
         <button class="btn btn-primary" type="submit" ng-click="submit()">Submit</button>
         <button class="btn btn-primary" ng-click="download()" ng-disabled="disableDownload">Download</button>
       </form>
+      <p>{{stat}}</p>
       <hr>
-      <img ngf-src="file" ngf-background="file" ngf-resize="{width: 100, quality: 0.9}" />
+      <h3>Uncompressed Image</h3>
+      <img ngf-src="file" ngf-background="file"  />
+      <hr>
+      <h3>Compressed Image</h3>
       <img ng-src="{{downloadedFile}}" />
     </div>
 

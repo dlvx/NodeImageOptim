@@ -5,7 +5,7 @@ var app = angular.module('app', ['ngFileUpload']);
 app.service('uploadService', ['Upload', function(Upload){
 
   var disableDownload = true;
-
+  var path = '';
   // this.enableDownload = funtion(){
   //   disableDownload = false;
   // }
@@ -17,8 +17,10 @@ app.service('uploadService', ['Upload', function(Upload){
       data: { file : file }
     }).then(function(res){
       disableDownload = false;
-      console.log('Success ' + res.config.data.file.name + ' uploaded. Response: ' + res.data + ' download: ' + disableDownload);
-      //console.log(resp);
+      path = res.data;
+      console.log(path);
+      console.log('Success ' + res.config.data.file.name + ' uploaded. Response: ' + res.data );
+
       //disableDownload = false;
       return res;
     },function(res){
@@ -37,12 +39,13 @@ app.controller('mainController', ['$scope', 'uploadService', '$http', function($
 
   $scope.disableDownload = true;// uploadService.disableDownload;
   $scope.downloadedFile;
+  $scope.stat = '';
 
   $scope.submit = function(){
     if($scope.form.file.$valid && $scope.file){
       console.log('Submit');
       $scope.uploadFile($scope.file);
-      //$scope.disableDownload = uploadService.disableDownload;
+      $scope.stat = 'Compressing';
     }
   };
 
@@ -50,6 +53,11 @@ app.controller('mainController', ['$scope', 'uploadService', '$http', function($
     console.log('Upload');
     uploadService.uploadFile(file).then(function(){
       $scope.disableDownload = uploadService.disableDownload;
+      $scope.stat = 'File Compressed';
+
+    }).then(function(){
+      $scope.downloadedFile = uploadService.path;
+      console.log($scope.downloadedFile);
     });
   };
 
@@ -62,6 +70,7 @@ app.controller('mainController', ['$scope', 'uploadService', '$http', function($
     // when the response is available
     console.log(response);
     $scope.downloadedFile = response.data;
+    console.log($scope.downloadedFile);
     }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.

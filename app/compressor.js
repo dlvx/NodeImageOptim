@@ -12,7 +12,7 @@ module.exports = {
       //Image optimization settings
       .src(configPaths.src) //path to the images source directory, will grab every .png file in that directory
       .dest(configPaths.dest) //destination folder for the compressed images
-      .use(imageminPngquant({quality: '65-80', speed: 4})) //using pngquant optimization plugin
+      .use(imageminPngquant({quality: '85-95', speed: 3})) //using pngquant optimization plugin
       //Optimize files using the given settings
       .run(function(err, files){
         if(err){
