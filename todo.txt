@@ -1,0 +1,8 @@
+- DONE validate file extension on client side using angular
+- DONE Put the upload function (mainController) into a service in app.js angular file
+- DONE Clear the images directory after compression
+- DONE Send a response after compressing an image succesfully
+- DONE Enable the download button after receiving the response
+- DONE Send back the compressed image when clicking the download button
+- Clear the compressed_images directory after file is sent
+- Check for error handling in http request handlers, callbacks, and promises, both in Nodejs and Angular
