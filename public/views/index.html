@@ -26,10 +26,12 @@
       </form>
       <p>{{stat}}</p>
       <hr>
-      <h3>Uncompressed Image</h3>
+      <h3>Uncompressed Image.</h3>
+      <h3 ng-if="file"> Size: {{(file.size/1024).toFixed(2) || 0}}bytes</h3>
       <img ngf-src="file" ngf-background="file"  />
       <hr>
-      <h3>Compressed Image</h3>
+      <h3>Compressed Image. </h3>
+      <h3 ng-if="downloadedFile">Size: {{downloadFileSize || 0}}Mb</h3>
       <img ng-src="{{downloadedFile}}" />
     </div>
 

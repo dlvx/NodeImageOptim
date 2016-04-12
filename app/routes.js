@@ -3,7 +3,7 @@
 var path = require('path');
 var multer  = require('multer');
 var mime = require('mime');
-var async = require('async');
+var fs = require('fs');
 
 //var fileMan = require('./fileMan.js');
 
@@ -40,24 +40,23 @@ module.exports = function(app, compressor){
 
     compressor.compress(configPaths, function(){
       console.log("File Compressed");
-      // res.writeHead(200, {'content-type': 'text/plain'});
-      // res.end('File received and compressed');
-      res.writeHead(200, {'content-type': 'text/plain'});
-      res.end('compressed_images/image.png');
+
+      res.writeHead(200, {'content-type': 'plain/text'});
+      res.end('File received and compressed');
     });
 
   });
 
   app.get('/download', function(req, res){
     console.log("DOWNLOAD");
-  //  res.sendFile(path.resolve('public/compressed_images/image.png'));
 
-    //res.writeHead(200, {'content-type': 'image/png'});
-    //res.contentLength = stat.size;
-    //res.end(path.resolve('public/compressed_images/image.png'), 'binary');
+    var stats = fs.statSync(path.resolve('public/compressed_images/image.png'));
+    var fileSizeInBytes = stats['size'];
+    var fileSizeInMb = fileSizeInBytes / 1024;
+    fileSizeInMb = +fileSizeInMb.toFixed(2);
 
     res.writeHead(200, {'content-type': 'text/plain'});
-    res.end('compressed_images/image.png');
+    res.end(JSON.stringify({path: 'compressed_images/image.png', size: fileSizeInMb}));
   });
 
 }

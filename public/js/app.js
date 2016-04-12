@@ -5,10 +5,6 @@ var app = angular.module('app', ['ngFileUpload']);
 app.service('uploadService', ['Upload', function(Upload){
 
   var disableDownload = true;
-  var path = '';
-  // this.enableDownload = funtion(){
-  //   disableDownload = false;
-  // }
 
   this.uploadFile = function(file){
 
@@ -17,11 +13,8 @@ app.service('uploadService', ['Upload', function(Upload){
       data: { file : file }
     }).then(function(res){
       disableDownload = false;
-      path = res.data;
-      console.log(path);
+      //console.log(res);
       console.log('Success ' + res.config.data.file.name + ' uploaded. Response: ' + res.data );
-
-      //disableDownload = false;
       return res;
     },function(res){
       console.log('Error status: ' + res.status);
@@ -37,8 +30,10 @@ app.service('uploadService', ['Upload', function(Upload){
 //Controller
 app.controller('mainController', ['$scope', 'uploadService', '$http', function($scope, uploadService, $http){
 
-  $scope.disableDownload = true;// uploadService.disableDownload;
+
+  $scope.disableDownload = true;
   $scope.downloadedFile;
+  $scope.downloadFileSize;
   $scope.stat = '';
 
   $scope.submit = function(){
@@ -54,10 +49,7 @@ app.controller('mainController', ['$scope', 'uploadService', '$http', function($
     uploadService.uploadFile(file).then(function(){
       $scope.disableDownload = uploadService.disableDownload;
       $scope.stat = 'File Compressed';
-
-    }).then(function(){
-      $scope.downloadedFile = uploadService.path;
-      console.log($scope.downloadedFile);
+      $scope.downloadFileSize = uploadService.downloadFileSize;
     });
   };
 
@@ -69,8 +61,8 @@ app.controller('mainController', ['$scope', 'uploadService', '$http', function($
     // this callback will be called asynchronously
     // when the response is available
     console.log(response);
-    $scope.downloadedFile = response.data;
-    console.log($scope.downloadedFile);
+    $scope.downloadedFile = response.data.path;
+    $scope.downloadFileSize = response.data.size;
     }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
