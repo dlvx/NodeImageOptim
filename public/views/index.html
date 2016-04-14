@@ -6,6 +6,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Scripts -->
 
@@ -15,25 +16,43 @@
     <script src="js/app.js"></script>
   </head>
   <body>
-    <div class="main-container" ng-controller="mainController">
-      <form  name="form">
-        <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-          ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">
-          Select
-        </div>
-        <button class="btn btn-primary" type="submit" ng-click="submit()">Submit</button>
-        <button class="btn btn-primary" ng-click="download()" ng-disabled="disableDownload">Download</button>
-      </form>
-      <p>{{stat}}</p>
-      <hr>
-      <h3>Uncompressed Image.</h3>
-      <h3 ng-if="file"> Size: {{(file.size/1024).toFixed(2) || 0}}Mb</h3>
-      <img ngf-src="file" ngf-background="file"  />
-      <hr>
-      <h3>Compressed Image. </h3>
-      <h3 ng-if="downloadedFile">Size: {{downloadFileSize || 0}}Mb</h3>
-      <img ng-src="{{downloadedFile}}" />
-    </div>
+    <div ng-controller="mainController">
+      <div class="jumbotron text-center">
+        <form  name="form">
+          <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ng-click="clear()">
+            Select
+          </div>
+          <button class="btn btn-primary" type="submit" ng-click="submit()" ng-disabled="file.type != 'image/png'">Submit</button>
+          <button class="btn btn-primary" ng-click="download()" ng-disabled="disableDownload">Download</button>
 
+
+        </form>
+        <div class="alert alert-danger" role="alert" ng-show="file && file.type != 'image/png'">Image format must be PNG</div>
+
+        <p>{{stat}}</p>
+      </div>
+
+      <br/>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <h3>Uncompressed Image.</h3>
+          <h3 ng-if="file"> Size: {{(file.size/1024).toFixed(2) || 0}}Mb</h3>
+          <div class="image-container">
+            <img ngf-src="file" ngf-background="file"  />
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <h3>Compressed Image. </h3>
+          <h3 ng-if="downloadedFile">Size: {{downloadFileSize || 0}}Mb</h3>
+          <div class="image-container">
+            <img ng-show="downloadedFile" ng-src="{{downloadedFile}}" />
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+    </div>
   </body>
 </html>

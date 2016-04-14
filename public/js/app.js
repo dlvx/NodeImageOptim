@@ -28,17 +28,23 @@ app.service('uploadService', ['Upload', function(Upload){
 }]);
 
 //Controller
-app.controller('mainController', ['$scope', 'uploadService', '$http', function($scope, uploadService, $http){
+app.controller('mainController', ['$scope', 'uploadService', '$http',  function($scope, uploadService, $http){
 
-
+  $scope.disableUpload = false;
   $scope.disableDownload = true;
+  $scope.fileName = '';
   $scope.downloadedFile;
   $scope.downloadFileSize;
   $scope.stat = '';
 
   $scope.submit = function(){
     if($scope.form.file.$valid && $scope.file){
+      if($scope.file.mimetype != 'image/png'){
+        $scope.disableUpload = true;
+      }
       console.log('Submit');
+      $scope.fileName = $scope.file.name;
+      console.log('NAME ' + $scope.fileName);
       $scope.uploadFile($scope.file);
       $scope.stat = 'Compressing';
     }
@@ -56,17 +62,23 @@ app.controller('mainController', ['$scope', 'uploadService', '$http', function($
   $scope.download = function(){
     $http({
       method: 'GET',
-      url: '/download'
+      url: '/download',
+      params: {
+        img : $scope.fileName
+      }
     }).then(function successCallback(response) {
-    // this callback will be called asynchronously
-    // when the response is available
-    console.log(response);
-    $scope.downloadedFile = response.data.path;
-    $scope.downloadFileSize = response.data.size;
+      $scope.disableDownload = true;
+      $scope.downloadedFile = response.data.path;
+      $scope.downloadFileSize = response.data.size;
     }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
     });
   };
+
+  $scope.clear = function(){
+    $scope.downloadedFile = '';
+    $scope.downloadFileSize = '';
+  }
 
 }]);

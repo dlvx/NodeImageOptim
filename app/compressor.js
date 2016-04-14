@@ -20,7 +20,6 @@ module.exports = {
         }
         console.log(files[0]);
         callback();
-        //remove(configPaths.src);
       });
 
   }

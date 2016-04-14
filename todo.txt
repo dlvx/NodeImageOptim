@@ -1,8 +1,19 @@
 - DONE validate file extension on client side using angular
 - DONE Put the upload function (mainController) into a service in app.js angular file
-- DONE Clear the images directory after compression
 - DONE Send a response after compressing an image succesfully
 - DONE Enable the download button after receiving the response
 - DONE Send back the compressed image when clicking the download button
-- Clear the compressed_images directory after file is sent
 - Check for error handling in http request handlers, callbacks, and promises, both in Nodejs and Angular
+    - DONE Handle error if uploads directory doesn't exist
+    - DONE Handle error if compressed_images directory doesn't exist
+    - DONE Do not allow images with formats different than .png to be uploaded (client side)
+    - DONE Clear the scope variables file and downloadedFile every time the Select button is clicked
+
+- DONE Clear the uploads directory after compression
+- Clear the compressed_images directory after compression
+
+
+===================================
+Kill process in port 3000
+netstat -o -n -a | findstr 0.0:3000
+TASKKILL /F /PID <PID>
