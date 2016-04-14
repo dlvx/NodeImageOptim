@@ -37,14 +37,14 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h3>Uncompressed Image.</h3>
-          <h3 ng-if="file"> Size: {{(file.size/1024).toFixed(2) || 0}}Mb</h3>
+          <h3 ng-if="file"> Size: {{(file.size/1024).toFixed(2) || 0}}Kb</h3>
           <div class="image-container">
             <img ngf-src="file" ngf-background="file"  />
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h3>Compressed Image. </h3>
-          <h3 ng-if="downloadedFile">Size: {{downloadFileSize || 0}}Mb</h3>
+          <h3 ng-if="downloadedFile">Size: {{downloadFileSize || 0}}Kb</h3>
           <div class="image-container">
             <img ng-show="downloadedFile" ng-src="{{downloadedFile}}" />
           </div>

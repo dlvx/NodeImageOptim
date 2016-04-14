@@ -10,6 +10,8 @@
     - DONE Clear the scope variables file and downloadedFile every time the Select button is clicked
 
 - DONE Clear the uploads directory after compression
+- Add a Heading in the view that says: "PNG Compressor"
+- Add a fixed height to the image-container divs
 - Clear the compressed_images directory after compression
 
 
